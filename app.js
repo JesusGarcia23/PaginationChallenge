@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.redirect('http://localhost:5000/apps');
+    res.redirect('https://secure-hollows-01712.herokuapp.com/apps');
 })
 
 app.get('/apps', (req, res) => {
