@@ -1,4 +1,4 @@
-var app = require('../app').app;
+var app = require('../index').app;
 var debug = require('debug')('www:server');
 var http = require('http');
 
