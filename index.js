@@ -1,9 +1,14 @@
 require('dotenv').config();
 const express = require('express');
+const favicon = require('serve-favicon');
+const logger  = require('morgan');
+const path = require('path');
 const data = require('./data');
 const app = express();
 const PORT = 5000;
 
+// Middleware Setup
+app.use(logger('dev'));
 
 app.get('/', (req, res) => {
     res.redirect('https://paginationchallenge.herokuapp.com/apps');
