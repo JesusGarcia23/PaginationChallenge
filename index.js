@@ -4,6 +4,11 @@ const data = require('./data');
 const app = express();
 const PORT = 5000;
 
+
+app.get('/', (req, res) => {
+    res.redirect('https://paginationchallenge.herokuapp.com/apps');
+})
+
 app.get('/apps', (req, res) => {
 
     let allData = [...data]
