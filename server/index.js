@@ -8,7 +8,7 @@ app.get('/app', (req, res) => {
 
     let allData = [...data]
 
-    const dataLength = (allData.length)
+    const dataLength = allData.length
 
     const by = req.query.by;
     const start = req.query.start;
@@ -66,21 +66,19 @@ app.get('/app', (req, res) => {
 
     }else if(by === 'name') {
 
-    limit = max > 0 ? allData[max].name : allData[dataLength - 1].name;
+    limit = max > 0 ? max : dataLength;
 
      const nameStartIndex = allData.findIndex(dataToSearch => dataToSearch.name === start);
  
      const nameLastIndex = allData.findIndex(dataToSearch => dataToSearch.name === end);
-    
-     const nameLimit = allData.findIndex(dataToSearch => dataToSearch.name === limit);
 
      theOrder = order === 'desc' ? 'desc' : 'asc';
 
      startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
 
-     lastIndex = nameLastIndex >= 0 ? nameLastIndex : nameLimit;
+     lastIndex = nameLastIndex >= 0 ? nameLastIndex : limit;
 
-     allData = allData.slice(startIndex, lastIndex + 1).slice(0, nameLimit);
+     allData = allData.slice(startIndex, lastIndex + 1).slice(0, limit);
 
 
      switch(theOrder){
