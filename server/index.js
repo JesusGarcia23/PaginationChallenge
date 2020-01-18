@@ -4,7 +4,7 @@ const data = require('./data');
 const app = express();
 const PORT = 5000;
 
-app.get('/app', (req, res) => {
+app.get('/apps', (req, res) => {
 
     let allData = [...data]
 
@@ -24,103 +24,157 @@ app.get('/app', (req, res) => {
 
     let theOrder; 
 
-    if(by === 'id') {
+    if(by) {
 
-     limit = max || dataLength; 
+        const nameStartIndex = allData.findIndex(dataToSearch => dataToSearch[by].toString() === start);
 
-     theOrder = order === 'desc' ? 'desc' : 'asc';
+        const nameLastIndex = allData.findIndex(dataToSearch => dataToSearch[by].toString() === end);
 
-     startIndex = start > 0 ? start - 1 : 0
-
-     lastIndex = limit < end ? limit : end
-
-     allData = allData.slice(startIndex, lastIndex).slice(0, limit);
-
-     switch(theOrder){
+        limit = max || dataLength;
         
-        case 'desc': {
-            allData = allData.sort((a, b) => {
-                if (b[by] > a[by]) {
-                    return 1;
-                }else if(b[by] < a[by]) {
-                    return -1;
-                }else{
-                    return 0;
+        startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
+
+        lastIndex = nameLastIndex >= 0 ?  nameLastIndex : limit;
+
+        allData = allData.slice(startIndex, lastIndex).slice(0, limit);
+
+        theOrder = order === 'desc' ? 'desc' : 'asc';
+
+        switch(theOrder) {
+        
+                case 'desc': {
+                    allData = allData.sort((a, b) => {
+                        if (b[by] > a[by]) {
+                            return 1;
+                        }else if(b[by] < a[by]) {
+                            return -1;
+                        }else{
+                            return 0;
+                        }
+                    })
+                    break;
                 }
-            })
-            break;
-        }
-
-        default: {
-           allData = allData.sort((a, b) => {
-                if (a[by] > b[by]) {
-                    return 1;
-                }else if(a[by] < b[by]) {
-                    return -1;
-                }else{
-                    return 0;
+        
+                default: {
+                   allData = allData.sort((a, b) => {
+                        if (a[by] > b[by]) {
+                            return 1;
+                        }else if(a[by] < b[by]) {
+                            return -1;
+                        }else{
+                            return 0;
+                        }
+                    })
                 }
-            })
-        }
-    }
-
-    }else if(by === 'name') {
-
-    limit = max > 0 ? max : dataLength;
-
-     const nameStartIndex = allData.findIndex(dataToSearch => dataToSearch.name === start);
- 
-     const nameLastIndex = allData.findIndex(dataToSearch => dataToSearch.name === end);
-
-     theOrder = order === 'desc' ? 'desc' : 'asc';
-
-     startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
-
-     lastIndex = nameLastIndex >= 0 ? nameLastIndex : limit;
-
-     allData = allData.slice(startIndex, lastIndex + 1).slice(0, limit);
-
-
-     switch(theOrder){
-
-        case 'desc': {
-            allData = allData.sort((a, b) => {
-                if (b[by] > a[by]) {
-                    return 1;
-                }else if(b[by] < a[by]) {
-                    return -1;
-                }else{
-                    return 0;
-                }
-            })
-            break;
-        }
-
-        default: {
-           allData = allData.sort((a, b) => {
-                if (a[by] > b[by]) {
-                    return 1;
-                }else if(a[by] < b[by]) {
-                    return -1;
-                }else{
-                    return 0;
-                }
-            })
-        }
-    }
 
     }
+}
 
-    //console.log(allData)
     res.json(allData)
 })
 
 app.listen(PORT, console.log(`SERVER LISTENING ON ${PORT}`))
 
 
+//ALL TESTS
+
 //BY NAME
-//http://localhost:5000/app?by=name&start=my-app-008&end=my-app-013&max=7&order=desc
+//http://localhost:5000/apps?by=name&start=my-app-001&end=my-app-050&max=10&order=asc
 
 
 //BY ID
-//http://localhost:5000/app?by=id&start=5&end=20&order=desc
+//http://localhost:5000/apps?by=id
+//http://localhost:5000/apps?by=id&start=1
+//http://localhost:5000/apps?by=id&start=1&end=5
+//http://localhost:5000/apps?by=id&start=5
+//http://localhost:5000/apps?by=id&start=1&max=5
+//http://localhost:5000/apps?by=id&start=1&order=desc
+//http://localhost:5000/apps?by=id&start=5&end=10&max=10&order=asc
+
+
+    // if(by === 'id') {
+
+    //  limit = max || dataLength; 
+
+    //  theOrder = order === 'desc' ? 'desc' : 'asc';
+
+    //  startIndex = start > 0 ? start - 1 : 0
+
+    //  lastIndex = limit < end ? limit : end
+
+    //  allData = allData.slice(startIndex, lastIndex).slice(0, limit);
+
+    //  switch(theOrder){
+        
+    //     case 'desc': {
+    //         allData = allData.sort((a, b) => {
+    //             if (b[by] > a[by]) {
+    //                 return 1;
+    //             }else if(b[by] < a[by]) {
+    //                 return -1;
+    //             }else{
+    //                 return 0;
+    //             }
+    //         })
+    //         break;
+    //     }
+
+    //     default: {
+    //        allData = allData.sort((a, b) => {
+    //             if (a[by] > b[by]) {
+    //                 return 1;
+    //             }else if(a[by] < b[by]) {
+    //                 return -1;
+    //             }else{
+    //                 return 0;
+    //             }
+    //         })
+    //     }
+    // }
+
+    // }else if(by === 'name') {
+
+    //  limit = max > 0 ? max : dataLength;
+
+    //  const nameStartIndex = allData.findIndex(dataToSearch => dataToSearch.name === start);
+ 
+    //  const nameLastIndex = allData.findIndex(dataToSearch => dataToSearch.name === end);
+
+    //  theOrder = order === 'desc' ? 'desc' : 'asc';
+
+    //  startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
+
+    //  lastIndex = nameLastIndex >= 0 ? nameLastIndex : limit;
+
+    //  allData = allData.slice(startIndex, lastIndex + 1).slice(0, limit);
+
+
+    //  switch(theOrder){
+
+    //     case 'desc': {
+    //         allData = allData.sort((a, b) => {
+    //             if (b[by] > a[by]) {
+    //                 return 1;
+    //             }else if(b[by] < a[by]) {
+    //                 return -1;
+    //             }else{
+    //                 return 0;
+    //             }
+    //         })
+    //         break;
+    //     }
+
+    //     default: {
+    //        allData = allData.sort((a, b) => {
+    //             if (a[by] > b[by]) {
+    //                 return 1;
+    //             }else if(a[by] < b[by]) {
+    //                 return -1;
+    //             }else{
+    //                 return 0;
+    //             }
+    //         })
+    //     }
+    // }
+
+    // }
