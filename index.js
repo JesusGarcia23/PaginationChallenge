@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 app.get('/', (req, res) => {
-    res.redirect('https://paginationchallenge.herokuapp.com/apps');
+    res.send('index');
 })
 
 app.get('/apps', (req, res) => {
