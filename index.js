@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const favicon = require('serve-favicon');
+const bodyParser = require('body-parser');
 const logger  = require('morgan');
 const path = require('path');
 const data = require('./data');
@@ -12,6 +13,7 @@ app.use(logger('dev'));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 app.get('/', (req, res) => {
