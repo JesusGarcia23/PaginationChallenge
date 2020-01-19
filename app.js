@@ -40,7 +40,7 @@ app.get('/apps', (req, res) => {
         
         startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
 
-        lastIndex = nameLastIndex >= 0 ?  nameLastIndex : max;
+        lastIndex = nameLastIndex >= 0 ?  nameLastIndex : 50;
 
         allData = allData.slice(startIndex, lastIndex).slice(0, max);
 
