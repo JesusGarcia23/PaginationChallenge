@@ -15,7 +15,7 @@ variables for the logic
     
     let startIndex;
 
-    let lastIndex = end || dataLength;
+    let lastIndex;
 
     let theOrder; 
     
@@ -85,7 +85,7 @@ variables for the logic
 
     let startIndex;
 
-    let lastIndex = end || dataLength;
+    let lastIndex;
 
     let theOrder; 
      
