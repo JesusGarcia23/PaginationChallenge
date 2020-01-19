@@ -20,35 +20,29 @@ app.get('/apps', (req, res) => {
 
     let allData = [...data]
 
-    const dataLength = allData.length
-
     const by = req.query.by;
     const start = req.query.start;
     const end = req.query.end;
-    const max = req.query.max;
+    const max = req.query.max || 50;
     const order = req.query.order;
-
-    let limit;
 
     let startIndex;
 
-    let lastIndex = end || dataLength;
+    let lastIndex;
 
     let theOrder; 
 
-    if(by) {
+    if(by && (by === 'id' || by === 'name')) {
 
         const nameStartIndex = allData.findIndex(dataToSearch => dataToSearch[by].toString() === start);
 
         const nameLastIndex = allData.findIndex(dataToSearch => dataToSearch[by].toString() === end);
-
-        limit = max || dataLength;
         
         startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
 
-        lastIndex = nameLastIndex >= 0 ?  nameLastIndex : limit;
+        lastIndex = nameLastIndex >= 0 ?  nameLastIndex : max;
 
-        allData = allData.slice(startIndex, lastIndex).slice(0, limit);
+        allData = allData.slice(startIndex, lastIndex).slice(0, max);
 
         theOrder = order === 'desc' ? 'desc' : 'asc';
 
