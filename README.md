@@ -2,8 +2,7 @@
 
 # Short Explanation
 
-First I get the values from the query parameters attached to the end of the url (to be able to use them for the pagination). And some
-variables for the logic
+First I get the values from the query parameters attached to the end of the url with `req.query` (to be able to use them for the pagination). And some variables for the logic
  
     let allData = [...data] // array of data
 
@@ -71,7 +70,7 @@ variables for the logic
 
 # Long Explanation
 
- First I get the values from the query parameters attached to the end of the url (to be able to use them for the pagination).
+ First I get the values from the query parameters attached to the end of the url using `req.query` (to be able to use them for the pagination).
  
     let allData = [...data] // array of data
 
