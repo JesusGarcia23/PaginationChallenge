@@ -23,7 +23,7 @@ First I get the values from the query parameters attached to the end of the url 
 
     const lastIndex = nameLastIndex >= 0 ?  nameLastIndex : 50;
     
-    allData = allData.slice(startIndex, lastIndex).slice(0, max);
+    allData = allData.slice(startIndex, lastIndex + 1).slice(0, max);
     
   Finally sorting the array depending `asc` (by default) or `desc`
   
@@ -118,7 +118,7 @@ it means the item exists in `allData`, so we proceed using it, otherwise the val
     
  Now I have the indexes I proceed to slice the array to get the specific data following the range parameters
   
-     allData = allData.slice(startIndex, lastIndex).slice(0, max);
+     allData = allData.slice(startIndex, lastIndex + 1).slice(0, max);
     
  Once I get the array with the data wanted, I proceed to check the order wanted (asc by default)
  
