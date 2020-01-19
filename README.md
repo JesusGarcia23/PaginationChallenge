@@ -28,7 +28,7 @@ variables for the logic
  
     startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
 
-    lastIndex = nameLastIndex >= 0 ?  nameLastIndex : max;
+    lastIndex = nameLastIndex >= 0 ?  nameLastIndex : 50;
     
     allData = allData.slice(startIndex, lastIndex).slice(0, max);
     
@@ -107,7 +107,7 @@ it means the item exists in `allData`, so we proceed using it, otherwise the val
 
     startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
 
-    lastIndex = nameLastIndex >= 0 ?  nameLastIndex : max;
+    lastIndex = nameLastIndex >= 0 ?  nameLastIndex : 50;
  
  I used ternary operators, but the translation of the code above would be something like:
  
