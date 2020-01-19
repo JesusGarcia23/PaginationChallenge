@@ -9,14 +9,8 @@ First I get the values from the query parameters attached to the end of the url 
     const by = req.query.by;
     const start = req.query.start;
     const end = req.query.end;
-    const max = req.query.max || 50;
-    const order = req.query.order;
-    
-    let startIndex;
-
-    let lastIndex;
-
-    let theOrder; 
+    const max = Number(req.query.max) > 1 ? req.query.max : 50;
+    const order = req.query.order; 
     
  Check if `by` exists and if it matches `id` or `name`. Then I find the range according the `start` and `end` and making sure 
  the item is in the provided array `allData`, and slicing the array to have only the wanted data with the following methods:
@@ -25,9 +19,9 @@ First I get the values from the query parameters attached to the end of the url 
 
     const nameLastIndex = allData.findIndex(dataToSearch => dataToSearch[by].toString() === end);
  
-    startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
+    const startIndex = nameStartIndex >= 0 ? nameStartIndex : 0;
 
-    lastIndex = nameLastIndex >= 0 ?  nameLastIndex : 50;
+    const lastIndex = nameLastIndex >= 0 ?  nameLastIndex : 50;
     
     allData = allData.slice(startIndex, lastIndex).slice(0, max);
     
@@ -77,7 +71,7 @@ First I get the values from the query parameters attached to the end of the url 
     const by = req.query.by;
     const start = req.query.start;
     const end = req.query.end;
-    const max = req.query.max || 50;
+    const max = Number(req.query.max) > 1 ? req.query.max : 50;
     const order = req.query.order;
   
  These variables are going to help with the logic
