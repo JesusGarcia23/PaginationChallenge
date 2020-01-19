@@ -167,6 +167,9 @@ it means the item exists in `allData`, so we proceed using it, otherwise the val
 
 # URL TO TEST THE ENDPOINT
 
+APP
+https://secure-hollows-01712.herokuapp.com/apps
+
 BY NAME
 https://secure-hollows-01712.herokuapp.com/apps?by=name&start=my-app-001&end=my-app-050&max=10&order=asc
 
