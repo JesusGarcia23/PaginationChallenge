@@ -46,7 +46,7 @@ describe('Automated tests', function() {
     });
 
     it('get apps by id from 45 to 50 in desc order (start = 45, order= desc)', function(done) {
-        request('https://secure-hollows-01712.herokuapp.com/apps?by=id&start=30&order=desc', function(error, response, body) {
+        request('https://secure-hollows-01712.herokuapp.com/apps?by=id&start=45&order=desc', function(error, response, body) {
             const obj = JSON.parse(response.body);
             expect(obj.findIndex(theObj => theObj.id === 50)).to.equal(0);
             expect(obj.findIndex(theObj => theObj.id === 49)).to.equal(1);

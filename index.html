@@ -20,7 +20,121 @@
       mocha.checkLeaks();
     </script>
 
-    <script src="allTests.js"></script>
+    <script>
+    const assert = chai.assert
+    describe('Automated tests', () => {
+
+    it('get all apps', async () => {
+        await fetch('http://localhost:5000/apps')
+            .then((res) => {
+                return res.json()
+            })
+            .then((res) => {
+                assert.equal(res.length, 50)
+            }).catch(err => {
+                assert.equal(err.actual, err.expected)
+            })
+    });
+
+    it('get apps by id starting from 5 with end of 10 (start = 5, end = 10)', async () => {
+        await fetch('http://localhost:5000/apps?by=id&start=5&end=10')
+            .then((res) => {
+                return res.json()
+            })
+            .then((res) => {
+                assert.equal(res.length, 6)
+                assert.equal(res.findIndex(theObj => theObj.id === 5), 0)
+                assert.equal(res.findIndex(theObj => theObj.id === 6), 1)
+                assert.equal(res.findIndex(theObj => theObj.id === 7), 2)
+                assert.equal(res.findIndex(theObj => theObj.id === 8), 3)
+                assert.equal(res.findIndex(theObj => theObj.id === 9), 4)
+                assert.equal(res.findIndex(theObj => theObj.id === 10), 5)
+            }).catch(err => {
+                assert.equal(err.actual, err.expected)
+            })
+    });
+
+
+    it('get apps by id from 15 to 19 (max) (start = 15, end = 35, max = 5)', async () => {
+        await fetch('http://localhost:5000/apps?by=id&start=15&end=35&max=5')
+            .then((res) => {
+                return res.json()
+            })
+            .then((res) => {
+                assert.equal(res.length, 5)
+                assert.equal(res.findIndex(theObj => theObj.id === 15), 0)
+                assert.equal(res.findIndex(theObj => theObj.id === 16), 1)
+                assert.equal(res.findIndex(theObj => theObj.id === 17), 2)
+                assert.equal(res.findIndex(theObj => theObj.id === 18), 3)
+                assert.equal(res.findIndex(theObj => theObj.id === 19), 4)
+            }).catch(err => {
+                assert.equal(err.actual, err.expected)
+            })
+    });
+
+
+    it('get apps by id from 45 to 50 in desc order (start = 45, order= desc)', async () => {
+        await fetch('http://localhost:5000/apps?by=id&start=45&order=desc')
+            .then((res) => {
+                return res.json()
+            })
+            .then((res) => {
+                assert.equal(res.length, 6)
+                assert.equal(res.findIndex(theObj => theObj.id === 50), 0)
+                assert.equal(res.findIndex(theObj => theObj.id === 49), 1)
+                assert.equal(res.findIndex(theObj => theObj.id === 48), 2)
+                assert.equal(res.findIndex(theObj => theObj.id === 47), 3)
+                assert.equal(res.findIndex(theObj => theObj.id === 46), 4)
+                assert.equal(res.findIndex(theObj => theObj.id === 45), 5)
+            }).catch(err => {
+                assert.equal(err.actual, err.expected)
+            })
+        });
+
+    it('get apps by name from 25 to 40 (start = 25, end = 40)', async () => {
+    await fetch('http://localhost:5000/apps?by=name&start=my-app-025&end=my-app-040')
+        .then((res) => {
+            return res.json()
+        })
+        .then((res) => {
+            assert.equal(res.length, 16)
+            assert.equal(res.findIndex(theObj => theObj.name === 'my-app-025'), 0)
+            assert.equal(res.findIndex(theObj => theObj.name === 'my-app-040'), res.length - 1)
+        }).catch(err => {
+            assert.equal(err.actual, err.expected)
+        })
+    });
+
+    it('get apps by name from 35 to 50 in desc order (start = 35, end = 50, order = desc)', async () => {
+    await fetch('http://localhost:5000/apps?by=name&start=my-app-035&end=my-app-050&order=desc')
+        .then((res) => {
+            return res.json()
+        })
+        .then((res) => {
+            assert.equal(res.length, 16)
+            assert.equal(res.findIndex(theObj => theObj.name === 'my-app-050'), 0)
+            assert.equal(res.findIndex(theObj => theObj.name === 'my-app-035'), res.length - 1)
+        }).catch(err => {
+            assert.equal(err.actual, err.expected)
+        })
+    });
+
+    it('get apps by name from 10 to 17 (max) in desc order (start = 10, end = 50, max = 8, order = desc)', async () => {
+    await fetch('http://localhost:5000/apps?by=name&start=my-app-010&end=my-app-050&max=8&order=desc')
+        .then((res) => {
+            return res.json()
+        })
+        .then((res) => {
+            assert.equal(res.length, 8)
+            assert.equal(res.findIndex(theObj => theObj.name === 'my-app-017'), 0)
+            assert.equal(res.findIndex(theObj => theObj.name === 'my-app-010'), res.length - 1)
+        }).catch(err => {
+            assert.equal(err.actual, err.expected)
+        })
+    });
+
+})
+    </script>
 
     <script class="mocha-exec">
       mocha.run();
