@@ -11,9 +11,16 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'test')));
+app.use(express.static(path.join(__dirname, 'node_modules')));
+//Store all JS and CSS in Scripts folder.
 
 app.get('/', (req, res) => {
     res.redirect('https://secure-hollows-01712.herokuapp.com/apps');
+})
+
+app.get('/tests', (req, res) => {
+    res.sendFile(path.join(__dirname + '/index.html'))
 })
 
 app.get('/apps', (req, res) => {
