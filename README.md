@@ -6,11 +6,11 @@ First I get the values from the query parameters attached to the end of the url 
  
     let allData = [...data] // array of data
 
-    const by = req.query.by;
-    const start = req.query.start;
-    const end = req.query.end;
-    const max = Number(req.query.max) > 1 ? req.query.max : 50;
-    const order = req.query.order; 
+    const by = req.query['range.by'];
+    const start = req.query['range.start'];
+    const end = req.query['range.end'];
+    const max = Number(req.query['range.max']) > 1 ? req.query['range.max'] : 50;
+    const order = req.query['range.order']; 
     
  Check if `by` exists and if it matches `id` or `name`. Then I find the range according the `start` and `end` and making sure 
  the item is in the provided array `allData`, and slicing the array to have only the wanted data with the following methods:
@@ -68,11 +68,11 @@ First I get the values from the query parameters attached to the end of the url 
  
     let allData = [...data] // array of data
 
-    const by = req.query.by;
-    const start = req.query.start;
-    const end = req.query.end;
-    const max = Number(req.query.max) > 1 ? req.query.max : 50;
-    const order = req.query.order;
+    const by = req.query['range.by'];
+    const start = req.query['range.start'];
+    const end = req.query['range.end'];
+    const max = Number(req.query['range.max']) > 1 ? req.query['range.max'] : 50;
+    const order = req.query['range.order'];
   
  These variables are going to help with the logic
 
