@@ -160,6 +160,9 @@ it means the item exists in `allData`, so we proceed using it, otherwise the val
 
 # URL TO TEST THE ENDPOINT
 
+MOCHA TESTS:
+https://secure-hollows-01712.herokuapp.com/tests
+
 APP
 https://secure-hollows-01712.herokuapp.com/apps
 
