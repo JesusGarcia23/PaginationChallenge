@@ -26,12 +26,13 @@ app.get('/tests', (req, res) => {
 app.get('/apps', (req, res) => {
 
     let allData = [...data]
+    console.log(req.query);
 
-    const by = req.query.by;
-    const start = req.query.start || 0;
-    const end = req.query.end || 0;
-    const max = Number(req.query.max) > 1 ? req.query.max : 50;
-    const order = req.query.order;
+    const by = req.query['range.by'];
+    const start = req.query['range.start'] || 0;
+    const end = req.query['range.end'] || 0;
+    const max = Number(req.query['range.max']) > 1 ? req.query['range.max'] : 50;
+    const order = req.query['range.order'];
 
     if(by && (by === 'id' || by === 'name')) {
 
